@@ -10,7 +10,7 @@ import mysql.connector
 from flask import Flask, render_template
 from flask import jsonify, request
 import webbrowser
-from flask_socketio import SocketIO  # Import SocketIO
+from flask_socketio import SocketIO  
 import time
 
 app = Flask(__name__)
@@ -127,39 +127,21 @@ def next_patient():
 @app.route('/start_scheduling', methods=['POST'])
 def start_scheduling():
     global s
-    s = True  # Set the global variable to True to enable scheduling
+    s = True  
     return jsonify({'success': True, 'message': 'Scheduling started successfully'})
-# ... (existing code)
-
 @app.route('/patient_mobile')
 def patient_mobile():
     return render_template('patient_mobile.html')
-
 @app.route('/get_current_patient')
 def get_current_patient_api():
     current_patient = get_current_patient()
     return jsonify({'current_patient': current_patient})
-
 def open_browser():
     webbrowser.open('http://10.5.27.176:5000/', new=2)
-
 import threading
-
-
 if __name__ == '__main__':
-    
     flask_thread = threading.Thread(target=socketio.run, args=(app,), kwargs={'host': '10.5.27.176', 'port': 5000, 'debug': True})
-
-    
     flask_thread.start()
-
-    
     socketio.sleep(2)
-
-    
     open_browser()
-
-    
     flask_thread.join()
-
-print("hello")
