@@ -71,7 +71,6 @@
                 <button class="slot" onclick="incrementCount(this)"><p>05.00pm-07.00pm</p></button>
             </div> 
             <br>
-            <button onclick="resetAvailability()">Reset Availability</button>
         </center>
     </div>
 
